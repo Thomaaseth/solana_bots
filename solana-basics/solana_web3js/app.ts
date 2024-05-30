@@ -50,8 +50,10 @@ async function sendTransaction() {
     const signature = await sendAndConfirmTransaction(connection, transaction, [sender])
     console.log(`Tx: https://explorer.solana.com/tx/${signature}?cluster=devnet`);
 
-
-
+    
+    const txInfo = await connection.getTransaction(signature, {maxSupportedTransactionVersion: 1})
+    console.log(`Transaction Details: /n`, txInfo);
 }
+
 
 sendTransaction().then(() => process.exit())
